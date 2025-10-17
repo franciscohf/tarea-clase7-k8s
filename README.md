@@ -47,7 +47,7 @@ postgres   0/1     6s
  Result:
 
 | NAME | Baseline | STATUS | RESTARTS |AGE|
-|---------|----------|------------|--------|
+|---------|----------|------------|--------|--------|
 | pod/postgres-0  | 1/1 | Running | 0 |3m55s|
 
 | NAME | TYPE | CLUSTER-IP  | EXTERNAL-IP |PORT(S)|
@@ -56,8 +56,8 @@ postgres   0/1     6s
                         
 
 | NAME | READY | AGE  |
-|---------|----------|------------|--------|
-| statefulset.apps/postgres  |  1/1 | None | 3m55s  |
+|---------|----------|------------|
+| statefulset.apps/postgres  |  1/1 | 3m55s  |
 
 
 
