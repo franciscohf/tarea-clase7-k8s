@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres-statefulset
+  namespace: tarea-clase7
+spec:
+  serviceName: postgres-headless # Nombre del Headless Service.
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:16 
+          ports:
+            - containerPort: 5432
+              name: postgres
+          envFrom:
+            - secretRef:
+                name: postgres-secret # Carga las credenciales desde el Secret.
+            - configMapRef:
+                name: postgres-configmap # Carga la configuración desde el ConfigMap.
+          volumeMounts:
+            - name: postgres-data # Monta el PVC definido en volumeClaimTemplates.
+              mountPath: /var/lib/postgresql/data # Ruta donde PostgreSQL almacena sus datos.
+  volumeClaimTemplates:
+    - metadata:
+        name: postgres-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi # Asigna 1 GB de almacenamiento persistente.
