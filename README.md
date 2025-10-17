@@ -46,14 +46,20 @@ postgres   0/1     6s
 
  Result:
 
- NAME             READY   STATUS    RESTARTS   AGE
-pod/postgres-0   1/1     Running   0          3m55s
+| NAME | Baseline | STATUS | RESTARTS |AGE|
+|---------|----------|------------|--------|
+| pod/postgres-0  | 1/1 | Running | 0 |3m55s|
 
-NAME                        TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
-service/postgres-headless   ClusterIP   None         <none>        5432/TCP   4m10s
+| NAME | TYPE | CLUSTER-IP  | EXTERNAL-IP |PORT(S)|
+|---------|----------|------------|--------|--------|
+| service/postgres-headless  | ClusterIP | None | <none>  |5432/TCP|
+                        
 
-NAME                        READY   AGE
-statefulset.apps/postgres   1/1     3m55s
+| NAME | READY | AGE  |
+|---------|----------|------------|--------|
+| statefulset.apps/postgres  |  1/1 | None | 3m55s  |
+
+
 
 
 7. Probar PostgreSQL
