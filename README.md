@@ -69,11 +69,12 @@ kubectl exec -it postgres-0 -- psql -U admin -d mibasedatos
 Result:
 
 mibasedatos=# SELECT * FROM estudiantes;
- id |    nombre    |        carrera
-----+--------------+------------------------
-  1 | Juan Perez   | Ingeniería de Sistemas
-  2 | Maria Lopez  | Ingeniería de Sistemas
-  3 | Carlos Gomez | Ingeniería de Sistemas
+
+| id |    nombre    |        carrera|
+|---------|----------|------------|
+| 1 | Juan Perez   | Ingeniería de Sistemas|
+| 2 | Maria Lopez  | Ingeniería de Sistemas|
+| 3 | Carlos Gomez | Ingeniería de Sistemas|
 
 8. Demostrar persistencia
 
@@ -81,45 +82,68 @@ kubectl delete pod postgres-0
 
 kubectl get pods -w
 
-NAME         READY   STATUS    RESTARTS   AGE
-postgres-0   1/1     Running   0          18s
+| NAME | READY | STATUS | RESTARTS |AGE|
+|---------|----------|------------|--------|--------|
+| postgres-0  | 1/1 | Running | 0 |18s|
+
 
 kubectl exec -it postgres-0 -- psql -U admin -d mibasedatos -c "SELECT * FROM estudiantes;"
 
-  id |    nombre    |        carrera
-----+--------------+------------------------
-  1 | Juan Perez   | Ingeniería de Sistemas
-  2 | Maria Lopez  | Ingeniería de Sistemas
-  3 | Carlos Gomez | Ingeniería de Sistemas
+| id |    nombre    |        carrera|
+|---------|----------|------------|
+| 1 | Juan Perez   | Ingeniería de Sistemas|
+| 2 | Maria Lopez  | Ingeniería de Sistemas|
+| 3 | Carlos Gomez | Ingeniería de Sistemas|
 
 **c) Comandos de verificación:**
 
 kubectl get all -n tarea-clase7
 
-NAME             READY   STATUS    RESTARTS   AGE
-pod/postgres-0   1/1     Running   0          8m7s
+| NAME | READY | STATUS | RESTARTS |AGE|
+|---------|----------|------------|--------|--------|
+| pod/postgres-0   | 1/1 | Running | 0 |8m7s|
 
-NAME                        TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
-service/postgres-headless   ClusterIP   None         <none>        5432/TCP   14m
+| NAME | TYPE | CLUSTER-IP | EXTERNAL-IP |PORT(S)|
+|---------|----------|------------|--------|--------|
+| service/postgres-headless   | ClusterIP | None |  <none> |5432/TCP|
 
-NAME                        READY   AGE
-statefulset.apps/postgres   1/1     13m
+14m
+
+| NAME | READY | AGE | 
+|---------|----------|------------|
+| statefulset.apps/postgres  | 1/1 | 13m | 
+
+
 
 
 kubectl get pvc -n tarea-clase7
 
-NAME                          STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
-postgres-storage-postgres-0   Bound    pvc-d5eb0937-7b5e-4014-93f0-b2540cfdd8b2   1Gi        RWO            standard       <unset>                 14m
+
+NAME                          STATUS 
+
+VOLUME                                     CAPACITY   ACCESS MODES  
+
+ STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+
+postgres-storage-postgres-0   Bound    
+
+pvc-d5eb0937-7b5e-4014-93f0-b2540cfdd8b2   1Gi        RWO   
+
+standard       <unset>                 14m
 
 
 kubectl get configmap,secret -n tarea-clase7
 
-NAME                         DATA   AGE
-configmap/kube-root-ca.crt   1      15m
-configmap/postgres-config    2      15m
+| NAME | DATA | AGE | 
+|---------|----------|------------|
+| configmap/kube-root-ca.crt   | 1 | 15m | 
+| configmap/postgres-config   | 2 | 15m | 
 
-NAME                     TYPE     DATA   AGE
-secret/postgres-secret   Opaque   2      15m
+| NAME |  TYPE |DATA | AGE | 
+|---------|----------|------------|------------|
+| secret/postgres-secret    | Opaque| 2 | 15m | 
+
+
 
 **d) Capturas de pantalla:**
 1. ![Todos los recursos](./screenshots/recursos.PNG)
